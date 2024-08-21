@@ -160,7 +160,7 @@ interface IExecutor is IAccessControl {
      * @dev    If a signature is empty, calldata is used for the execution, calldata is appended to signature otherwise.
      * @param  targets           Array of targets to be called by the actions set.
      * @param  values            Array of values to pass in each call by the actions set.
-     * @param  signatures        Array of function signatures to encode in each call by the actions (can be empty).
+     * @param  signatures        Array of function signatures to encode in each call by the actions which can be empty strings.
      * @param  calldatas         Array of calldata to pass in each call by the actions set.
      * @param  withDelegatecalls Array of whether to delegatecall for each call of the actions set.
      **/
