@@ -137,7 +137,7 @@ contract ExecutorTestBase is Test {
 contract ExecutorConstructorTests is ExecutorTestBase {
 
     function test_constructor_invalidInitParams_boundary() public {
-        vm.expectRevert(abi.encodeWithSignature("InvalidInitParams()"));
+        vm.expectRevert(abi.encodeWithSignature("GracePeriodTooShort()"));
         executor = new Executor({
             delay_:       DELAY,
             gracePeriod_: 10 minutes - 1

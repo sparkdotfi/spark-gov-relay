@@ -14,7 +14,6 @@ interface IExecutor is IAccessControl {
     /*** Errors                                                                                                     ***/
     /******************************************************************************************************************/
 
-    error InvalidInitParams();
     error GracePeriodTooShort();
     error OnlyQueuedActions();
     error TimelockNotFinished();

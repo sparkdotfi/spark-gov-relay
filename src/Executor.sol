@@ -40,10 +40,6 @@ contract Executor is IExecutor, AccessControl {
         uint256 delay_,
         uint256 gracePeriod_
     ) {
-        if (
-            gracePeriod_ < MINIMUM_GRACE_PERIOD
-        ) revert InvalidInitParams();
-
         _updateDelay(delay_);
         _updateGracePeriod(gracePeriod_);
 
@@ -148,7 +144,6 @@ contract Executor is IExecutor, AccessControl {
     function updateGracePeriod(uint256 newGracePeriod)
         external override onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        if (newGracePeriod < MINIMUM_GRACE_PERIOD) revert GracePeriodTooShort();
         _updateGracePeriod(newGracePeriod);
     }
 
@@ -229,6 +224,7 @@ contract Executor is IExecutor, AccessControl {
     }
 
     function _updateGracePeriod(uint256 newGracePeriod) internal {
+        if (newGracePeriod < MINIMUM_GRACE_PERIOD) revert GracePeriodTooShort();
         emit GracePeriodUpdate(gracePeriod, newGracePeriod);
         gracePeriod = newGracePeriod;
     }
