@@ -47,9 +47,6 @@ contract Executor is IExecutor, AccessControl {
         _updateDelay(delay_);
         _updateGracePeriod(gracePeriod_);
 
-        _setRoleAdmin(SUBMISSION_ROLE, DEFAULT_ADMIN_ROLE);
-        _setRoleAdmin(GUARDIAN_ROLE,   DEFAULT_ADMIN_ROLE);
-
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(DEFAULT_ADMIN_ROLE, address(this));  // Necessary for self-referential calls to change configuration
     }
