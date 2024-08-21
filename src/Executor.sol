@@ -113,7 +113,6 @@ contract Executor is IExecutor, AccessControl {
                 actionsSet.values[i],
                 actionsSet.signatures[i],
                 actionsSet.calldatas[i],
-                actionsSet.executionTime,
                 actionsSet.withDelegatecalls[i]
             );
         }
@@ -200,7 +199,6 @@ contract Executor is IExecutor, AccessControl {
         uint256 value,
         string memory signature,
         bytes memory data,
-        uint256 executionTime,
         bool withDelegatecall
     ) internal returns (bytes memory) {
         if (address(this).balance < value) revert InsufficientBalance();
