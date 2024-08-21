@@ -183,7 +183,7 @@ contract Executor is IExecutor, AccessControl {
     function getCurrentState(uint256 actionsSetId) public view override returns (ActionsSetState) {
         if (actionsSetCount <= actionsSetId) revert InvalidActionsSetId();
 
-        ActionsSet storage actionsSet =_actionsSets[actionsSetId];
+        ActionsSet storage actionsSet = _actionsSets[actionsSetId];
 
         if      (actionsSet.canceled) return ActionsSetState.Canceled;
         else if (actionsSet.executed) return ActionsSetState.Executed;
