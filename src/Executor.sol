@@ -40,15 +40,8 @@ contract Executor is IExecutor, AccessControl {
         uint256 delay_,
         uint256 gracePeriod_
     ) {
-        if (
-            gracePeriod_ < MINIMUM_GRACE_PERIOD
-        ) revert InvalidInitParams();
-
         _updateDelay(delay_);
         _updateGracePeriod(gracePeriod_);
-
-        _setRoleAdmin(SUBMISSION_ROLE, DEFAULT_ADMIN_ROLE);
-        _setRoleAdmin(GUARDIAN_ROLE,   DEFAULT_ADMIN_ROLE);
 
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(DEFAULT_ADMIN_ROLE, address(this));  // Necessary for self-referential calls to change configuration
@@ -120,7 +113,6 @@ contract Executor is IExecutor, AccessControl {
                 actionsSet.values[i],
                 actionsSet.signatures[i],
                 actionsSet.calldatas[i],
-                actionsSet.executionTime,
                 actionsSet.withDelegatecalls[i]
             );
         }
@@ -151,7 +143,6 @@ contract Executor is IExecutor, AccessControl {
     function updateGracePeriod(uint256 newGracePeriod)
         external override onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        if (newGracePeriod < MINIMUM_GRACE_PERIOD) revert GracePeriodTooShort();
         _updateGracePeriod(newGracePeriod);
     }
 
@@ -191,7 +182,7 @@ contract Executor is IExecutor, AccessControl {
     function getCurrentState(uint256 actionsSetId) public view override returns (ActionsSetState) {
         if (actionsSetCount <= actionsSetId) revert InvalidActionsSetId();
 
-        ActionsSet storage actionsSet =_actionsSets[actionsSetId];
+        ActionsSet storage actionsSet = _actionsSets[actionsSetId];
 
         if      (actionsSet.canceled) return ActionsSetState.Canceled;
         else if (actionsSet.executed) return ActionsSetState.Executed;
@@ -208,7 +199,6 @@ contract Executor is IExecutor, AccessControl {
         uint256 value,
         string memory signature,
         bytes memory data,
-        uint256 executionTime,
         bool withDelegatecall
     ) internal returns (bytes memory) {
         if (address(this).balance < value) revert InsufficientBalance();
@@ -232,6 +222,7 @@ contract Executor is IExecutor, AccessControl {
     }
 
     function _updateGracePeriod(uint256 newGracePeriod) internal {
+        if (newGracePeriod < MINIMUM_GRACE_PERIOD) revert GracePeriodTooShort();
         emit GracePeriodUpdate(gracePeriod, newGracePeriod);
         gracePeriod = newGracePeriod;
     }
