@@ -44,7 +44,7 @@ interface IExecutor is IAccessControl {
      * @notice This struct contains the data needed to execute a specified set of actions.
      * @param  targets           Array of targets to call.
      * @param  values            Array of values to pass in each call.
-     * @param  signatures        Array of function signatures to encode in each call (can be empty).
+     * @param  signatures        Array of function signatures to encode in each call by the actions which can be empty strings.
      * @param  calldatas         Array of calldatas to pass in each call, appended to the signature at the same array index if not empty.
      * @param  withDelegateCalls Array of whether to delegatecall for each call.
      * @param  executionTime     Timestamp starting from which the actions set can be executed.
