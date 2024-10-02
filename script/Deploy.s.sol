@@ -11,10 +11,9 @@ contract DeployBaseExecutor is Script {
 
     function run() public {
         address executor = Deploy.deployExecutor(100, 1000);
-
         address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
 
-        // TODO: What is guardian here?
-        Deploy.setUpExecutorPermissions(executor, receiver, address(1));
+        Deploy.setUpExecutorPermissions(executor, receiver);
     }
+
 }

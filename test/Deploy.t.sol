@@ -35,13 +35,11 @@ contract DeployTests is Test {
         );
 
         assertEq(executor.hasRole(executor.SUBMISSION_ROLE(),    address(receiver)),    false);
-        assertEq(executor.hasRole(executor.GUARDIAN_ROLE(),      makeAddr("guardian")), false);
         assertEq(executor.hasRole(executor.DEFAULT_ADMIN_ROLE(), address(this)),        true);
 
-        Deploy.setUpExecutorPermissions(address(executor), address(receiver), makeAddr("guardian"));
+        Deploy.setUpExecutorPermissions(address(executor), address(receiver));
 
         assertEq(executor.hasRole(executor.SUBMISSION_ROLE(),    address(receiver)),    true);
-        assertEq(executor.hasRole(executor.GUARDIAN_ROLE(),      makeAddr("guardian")), true);
         assertEq(executor.hasRole(executor.DEFAULT_ADMIN_ROLE(), address(this)),        false);
     }
 
