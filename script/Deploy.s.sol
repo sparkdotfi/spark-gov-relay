@@ -10,10 +10,14 @@ import { Deploy } from "../deploy/Deploy.sol";
 contract DeployBaseExecutor is Script {
 
     function run() public {
+        vm.startBroadcast();
+
         address executor = Deploy.deployExecutor(100, 1000);
         address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
 
         Deploy.setUpExecutorPermissions(executor, receiver);
+
+        vm.stopBroadcast();
     }
 
 }
