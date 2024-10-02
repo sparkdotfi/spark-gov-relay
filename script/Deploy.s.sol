@@ -1,15 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.0;
 
-import { Script } from 'forge-std/Test.sol';
+import { Ethereum } from "lib/spark-address-registry/src/Ethereum.sol";
+
+import { Script } from 'forge-std/Script.sol';
 
 import { Deploy } from "../deploy/Deploy.sol";
 
 contract DeployBaseExecutor is Script {
 
-    function run() public override {
+    function run() public {
         address executor = Deploy.deployExecutor(100, 1000);
 
-        address receiver = Deploy.deployOptimismReceiver(address(this), executor);
+        address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
+
+        // TODO: What is guardian here?
+        Deploy.setUpExecutorPermissions(executor, receiver, address(1));
     }
 }
