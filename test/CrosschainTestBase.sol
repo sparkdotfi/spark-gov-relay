@@ -35,12 +35,12 @@ abstract contract CrosschainTestBase is Test {
 
     event TestEvent();
 
-    address constant L1_EXECUTOR    = 0x3300f198988e4C9C63F75dF86De36421f06af8c4;
+    address constant L1_SPARK_PROXY = 0x3300f198988e4C9C63F75dF86De36421f06af8c4;
     address constant L1_PAUSE_PROXY = 0xBE8E3e3618f7474F8cB1d074A26afFef007E98FB;
     address GUARDIAN                = makeAddr('guardian');
 
     L2BridgeExecutorArguments defaultL2BridgeExecutorArgs = L2BridgeExecutorArguments({
-        ethereumGovernanceExecutor: L1_EXECUTOR,
+        ethereumGovernanceExecutor: L1_SPARK_PROXY,
         delay:                      600,
         gracePeriod:                1200,
         guardian:                   GUARDIAN
@@ -86,7 +86,7 @@ abstract contract CrosschainTestBase is Test {
         );
 
         vm.prank(L1_PAUSE_PROXY);
-        IL1Executor(L1_EXECUTOR).exec(
+        IL1Executor(L1_SPARK_PROXY).exec(
             address(crosschainPayload),
             abi.encodeWithSelector(IPayload.execute.selector)
         );
@@ -335,7 +335,7 @@ abstract contract CrosschainTestBase is Test {
         );
 
         vm.prank(L1_PAUSE_PROXY);
-        IL1Executor(L1_EXECUTOR).exec(
+        IL1Executor(L1_SPARK_PROXY).exec(
             address(crosschainPayload),
             abi.encodeWithSelector(IPayload.execute.selector)
         );
