@@ -19,7 +19,7 @@ library Deploy {
         receiver = address(new OptimismReceiver(l1Authority, executor));
     }
 
-    function setUpExecutorPermissions(address executor_, address receiver)
+    function setUpExecutorPermissions(address executor_, address receiver, address deployer)
         internal
     {
         // NOTE: Using implementation instead of interface because OZ didn't define
@@ -27,7 +27,7 @@ library Deploy {
         Executor executor = Executor(executor_);
 
         executor.grantRole(executor.SUBMISSION_ROLE(),     receiver);
-        executor.revokeRole(executor.DEFAULT_ADMIN_ROLE(), address(this));
+        executor.revokeRole(executor.DEFAULT_ADMIN_ROLE(), deployer);
     }
 
 }
