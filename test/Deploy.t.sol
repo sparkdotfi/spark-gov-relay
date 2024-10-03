@@ -34,10 +34,12 @@ contract DeployTests is Test {
             Deploy.deployOptimismReceiver(makeAddr("l1Authority"), makeAddr("executor"))
         );
 
+        address deployer = address(this);
+
         assertEq(executor.hasRole(executor.SUBMISSION_ROLE(),    address(receiver)),    false);
         assertEq(executor.hasRole(executor.DEFAULT_ADMIN_ROLE(), address(this)),        true);
 
-        Deploy.setUpExecutorPermissions(address(executor), address(receiver));
+        Deploy.setUpExecutorPermissions(address(executor), address(receiver), deployer);
 
         assertEq(executor.hasRole(executor.SUBMISSION_ROLE(),    address(receiver)),    true);
         assertEq(executor.hasRole(executor.DEFAULT_ADMIN_ROLE(), address(this)),        false);
