@@ -9,6 +9,26 @@ import { Script } from 'forge-std/Script.sol';
 
 import { Deploy } from "../deploy/Deploy.sol";
 
+contract DeployArbitrumOneExecutor is Script {
+
+    function run() public {
+        vm.createSelectFork(getChain("arbitrum_one").rpcUrl);
+
+        vm.startBroadcast();
+
+        address executor = Deploy.deployExecutor(0, 7 days);
+        address receiver = Deploy.deployArbitrumReceiver(Ethereum.SPARK_PROXY, executor);
+
+        console.log("executor deployed at:", executor);
+        console.log("receiver deployed at:", receiver);
+
+        Deploy.setUpExecutorPermissions(executor, receiver, msg.sender);
+
+        vm.stopBroadcast();
+    }
+
+}
+
 contract DeployBaseExecutor is Script {
 
     function run() public {
@@ -16,7 +36,7 @@ contract DeployBaseExecutor is Script {
 
         vm.startBroadcast();
 
-        address executor = Deploy.deployExecutor(100, 1000);
+        address executor = Deploy.deployExecutor(0, 7 days);
         address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
 
         console.log("executor deployed at:", executor);
