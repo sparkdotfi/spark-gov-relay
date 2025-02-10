@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0
 pragma solidity ^0.8.0;
 
+import { ArbitrumReceiver } from 'lib/xchain-helpers/src/receivers/ArbitrumReceiver.sol';
 import { OptimismReceiver } from 'lib/xchain-helpers/src/receivers/OptimismReceiver.sol';
 
 import { Executor } from 'src/Executor.sol';
@@ -11,6 +12,12 @@ library Deploy {
         internal returns (address executor)
     {
         executor = address(new Executor(delay, gracePeriod));
+    }
+
+    function deployArbitrumReceiver(address l1Authority, address executor)
+        internal returns (address receiver)
+    {
+        receiver = address(new ArbitrumReceiver(l1Authority, executor));
     }
 
     function deployOptimismReceiver(address l1Authority, address executor)
