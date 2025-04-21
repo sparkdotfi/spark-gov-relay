@@ -48,3 +48,23 @@ contract DeployBaseExecutor is Script {
     }
 
 }
+
+contract DeployOptimismExecutor is Script {
+
+    function run() public {
+        vm.createSelectFork(getChain("optimism").rpcUrl);
+
+        vm.startBroadcast();
+
+        address executor = Deploy.deployExecutor(0, 7 days);
+        address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
+
+        console.log("executor deployed at:", executor);
+        console.log("receiver deployed at:", receiver);
+
+        Deploy.setUpExecutorPermissions(executor, receiver, msg.sender);
+
+        vm.stopBroadcast();
+    }
+
+}
