@@ -68,3 +68,24 @@ contract DeployOptimismExecutor is Script {
     }
 
 }
+
+contract DeployUnichainExecutor is Script {
+
+    function run() public {
+        vm.createSelectFork(vm.envString("UNICHAIN_RPC_URL"));
+
+        vm.startBroadcast();
+
+        address executor = Deploy.deployExecutor(0, 7 days);
+        address receiver = Deploy.deployOptimismReceiver(Ethereum.SPARK_PROXY, executor);
+
+        console.log("executor deployed at:", executor);
+        console.log("receiver deployed at:", receiver);
+
+        Deploy.setUpExecutorPermissions(executor, receiver, msg.sender);
+
+        vm.stopBroadcast();
+    }
+
+}
+
