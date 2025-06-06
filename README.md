@@ -17,4 +17,3 @@ In order to add governance relay infrastructure for a new domain, perform the fo
 5. Enjoy governance messages being passed through the bridge to your domain! 🎉
 
 ***
-*The IP in this repository was assigned to Mars SPC Limited in respect of the MarsOne SP*
