@@ -10,3 +10,12 @@
 [submodule "lib/spark-address-registry"]
 	path = lib/spark-address-registry
 	url = https://github.com/marsfoundation/spark-address-registry
+[submodule "lib/devtools"]
+	path = lib/devtools
+	url = https://github.com/layerzero-labs/devtools
+[submodule "lib/solidity-bytes-utils"]
+	path = lib/solidity-bytes-utils
+	url = https://github.com/GNSPS/solidity-bytes-utils
+[submodule "lib/LayerZero-v2"]
+	path = lib/LayerZero-v2
+	url = https://github.com/layerzero-labs/LayerZero-v2
