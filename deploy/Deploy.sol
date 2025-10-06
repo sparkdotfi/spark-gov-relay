@@ -27,7 +27,14 @@ library Deploy {
         receiver = address(new OptimismReceiver(l1Authority, executor));
     }
 
-    function deployLZReceiver(address destinationEndpoint, uint32 srcEid,address sourceAuthority, address executor)
+    function deployLZReceiver(
+        address destinationEndpoint,
+        uint32  srcEid,
+        address sourceAuthority,
+        address executor,
+        address delegate,
+        address owner
+    )
         internal returns (address receiver)
     {
         receiver = address(new LZReceiver(
@@ -35,8 +42,8 @@ library Deploy {
             srcEid,
             bytes32(uint256(uint160(sourceAuthority))),
             executor,
-            address(this),
-            address(this)
+            delegate,
+            owner
         ));
     }
 
