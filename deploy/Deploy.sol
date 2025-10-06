@@ -34,7 +34,9 @@ library Deploy {
             destinationEndpoint,
             srcEid,
             bytes32(uint256(uint160(sourceAuthority))),
-            executor
+            executor,
+            address(this),
+            address(this)
         ));
     }
 

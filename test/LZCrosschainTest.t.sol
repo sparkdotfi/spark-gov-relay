@@ -38,7 +38,9 @@ contract LZCrosschainTest is CrosschainTestBase {
             LZForwarder.ENDPOINT_BNB,
             LZForwarder.ENDPOINT_ID_ETHEREUM,
             bytes32(uint256(uint160(defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor))),
-            vm.computeCreateAddress(address(this), 3)
+            vm.computeCreateAddress(address(this), 3),
+            L1_SPARK_PROXY,
+            L1_SPARK_PROXY
         ));
 
         mainnet.selectFork();
