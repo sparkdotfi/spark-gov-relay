@@ -30,7 +30,7 @@ contract BaseChainCrosschainTest is CrosschainTestBase {
         remote.selectFork();
         bridgeReceiver = address(new OptimismReceiver(
             defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor,
-            vm.computeCreateAddress(address(this), 2)
+            vm.computeCreateAddress(address(this), 3)
         ));
     }
 

@@ -31,7 +31,7 @@ contract GnosisCrosschainTest is CrosschainTestBase {
             AMBBridgeTesting.getGnosisMessengerFromChainAlias(bridge.destination.chain.chainAlias),
             bytes32(uint256(1)),  // Ethereum chainid
             defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor,
-            vm.computeCreateAddress(address(this), 2)
+            vm.computeCreateAddress(address(this), 3)
         ));
     }
 
