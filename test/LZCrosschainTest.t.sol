@@ -18,7 +18,7 @@ contract LZCrosschainTest is CrosschainTestBase {
         internal override returns (IPayload)
     {
         return IPayload(new LZCrosschainPayload(
-            LZForwarder.ENDPOINT_ID_BNB,
+            LZForwarder.ENDPOINT_ID_AVALANCHE,
             LZForwarder.ENDPOINT_ETHEREUM,
             bridgeReceiver,
             targetPayload,
@@ -27,7 +27,7 @@ contract LZCrosschainTest is CrosschainTestBase {
     }
 
     function setupDomain() internal override {
-        remote = getChain('bnb_smart_chain').createFork();
+        remote = getChain('avalanche').createFork();
         bridge = LZBridgeTesting.createLZBridge(
             mainnet,
             remote
@@ -35,12 +35,12 @@ contract LZCrosschainTest is CrosschainTestBase {
 
         remote.selectFork();
         bridgeReceiver = address(new LZReceiver({
-            _destinationEndpoint : LZForwarder.ENDPOINT_BNB,
+            _destinationEndpoint : LZForwarder.ENDPOINT_AVALANCHE,
             _srcEid              : LZForwarder.ENDPOINT_ID_ETHEREUM,
             _sourceAuthority     : bytes32(uint256(uint160(defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor))),
             _target              : vm.computeCreateAddress(address(this), 3),
-            _delegate            : L1_SPARK_PROXY,
-            _owner               : L1_SPARK_PROXY
+            _delegate            : address(1),
+            _owner               : address(1)
         }));
 
         mainnet.selectFork();
