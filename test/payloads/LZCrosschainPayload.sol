@@ -31,15 +31,15 @@ contract LZCrosschainPayload is CrosschainPayload {
     function execute() external override {
         bytes memory options = OptionsBuilder.newOptions().addExecutorLzReceiveOption(200_000, 0);
 
-        LZForwarder.sendMessage(
-            dstEid,
-            bytes32(uint256(uint160(receiver))),
-            ILayerZeroEndpointV2(lzEndpoint),
-            encodeCrosschainExecutionMessage(),
-            options,
-            msg.sender,
-            false
-        );
+        LZForwarder.sendMessage({
+            _dstEid        : dstEid,
+            _receiver      : bytes32(uint256(uint160(receiver))),
+            endpoint       : ILayerZeroEndpointV2(lzEndpoint),
+            _message       : encodeCrosschainExecutionMessage(),
+            _options       : options,
+            _refundAddress : msg.sender,
+            _payInLzToken  : false
+        });
     }
 
 }

@@ -34,14 +34,14 @@ contract LZCrosschainTest is CrosschainTestBase {
         );
 
         remote.selectFork();
-        bridgeReceiver = address(new LZReceiver(
-            LZForwarder.ENDPOINT_BNB,
-            LZForwarder.ENDPOINT_ID_ETHEREUM,
-            bytes32(uint256(uint160(defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor))),
-            vm.computeCreateAddress(address(this), 3),
-            L1_SPARK_PROXY,
-            L1_SPARK_PROXY
-        ));
+        bridgeReceiver = address(new LZReceiver({
+            _destinationEndpoint : LZForwarder.ENDPOINT_BNB,
+            _srcEid              : LZForwarder.ENDPOINT_ID_ETHEREUM,
+            _sourceAuthority     : bytes32(uint256(uint160(defaultL2BridgeExecutorArgs.ethereumGovernanceExecutor))),
+            _target              : vm.computeCreateAddress(address(this), 3),
+            _delegate            : L1_SPARK_PROXY,
+            _owner               : L1_SPARK_PROXY
+        }));
 
         mainnet.selectFork();
         vm.deal(L1_SPARK_PROXY, 0.01 ether);

@@ -37,14 +37,14 @@ library Deploy {
     )
         internal returns (address receiver)
     {
-        receiver = address(new LZReceiver(
-            destinationEndpoint,
-            srcEid,
-            bytes32(uint256(uint160(sourceAuthority))),
-            executor,
-            delegate,
-            owner
-        ));
+        receiver = address(new LZReceiver({
+            _destinationEndpoint : destinationEndpoint,
+            _srcEid              : srcEid,
+            _sourceAuthority     : bytes32(uint256(uint160(sourceAuthority))),
+            _target              : executor,
+            _delegate            : delegate,
+            _owner               : owner
+        }));
     }
 
     function setUpExecutorPermissions(address executor_, address receiver, address deployer)
