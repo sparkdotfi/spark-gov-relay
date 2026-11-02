@@ -15,3 +15,16 @@ In order to add governance relay infrastructure for a new domain, perform the fo
 3. Use proper labeling for your open PR (always set adequate priority and status)
 4. Get an approving review from at least one of three designated reviewers - **@hexonaut**, **@lucas-manuel** or **@barrutko**
 5. Enjoy governance messages being passed through the bridge to your domain! 🎉
+
+## Audits
+
+Audit reports are hosted on the auditors' public portfolio pages:
+
+| Auditor | Report | Version | Date |
+| --- | --- | --- | --- |
+| ChainSecurity | [Sky Governance Relay](https://www.chainsecurity.com/security-audit/sky-governance-relay/) | - | 2026-08-21 |
+| Cantina | [Sky: Stars LZ Governance](https://cantina.xyz/portfolio/3369b702-f6e2-4c17-b6e1-1ff34953e68a) | - | 2026-08-19 |
+| Cantina | [xchain-helpers; spark-gov-relay](https://cantina.xyz/portfolio/854c4127-0cdc-4712-be6b-60d0c01f1a54) | v1.0.1 | 2024-08-20 |
+| ChainSecurity | [SparkDAO Governance Relay](https://www.chainsecurity.com/security-audit/sparkdao-governance-relay/) | v1.0.0 | 2024-07-31 |
+
+ChainSecurity reports are cumulative: each portfolio page hosts the latest version of the report, which covers all previously reviewed versions.
